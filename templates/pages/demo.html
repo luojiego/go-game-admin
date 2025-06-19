@@ -1,0 +1,353 @@
+{{ template "layout/header.html" . }}
+
+{{ template "layout/nav.html" . }}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>用户详情</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">用户管理</a></li>
+                        <li class="breadcrumb-item active">用户详情</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Search card -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title">用户查询</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <select id="searchType" class="form-control">
+                                <option value="invitecode">邀请码</option>
+                                <option value="sid">用户ID</option>
+                                <option value="nickname">昵称</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" id="searchValue" class="form-control bg-white text-dark border shadow-sm" placeholder="请输入搜索内容">
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" id="searchBtn" class="btn btn-primary btn-block">
+                                <i class="fas fa-search"></i> 查询
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User details card -->
+            <div class="card mb-4 user-card" id="userDetailCard" style="display: none;">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">用户详情</h3>
+                    <div>
+                        <span id="userStatus" class="user-status"></span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Left Column: Basic Info -->
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h3 class="card-title">基本信息</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="stat-card">
+                                                <span class="stat-label"><i class="fas fa-user"></i> 昵称：</span>
+                                                <span id="userName" class="mb-1"></span>
+                                                <!-- 增加一个隐藏的 input 存储 userVip 的 value -->
+                                                <input type="hidden" id="userVipValue">
+                                                <p id="userVip" class="mb-0 badge bg-warning text-dark"></p>
+                                            </div>
+                                            <div class="stat-card">
+                                                <span class="stat-label"><i class="fas fa-id-card"></i> 用户ID：</span>
+                                                <span id="accountId" class="stat-value"></span>
+                                            </div>
+                                            <div class="stat-card">
+                                                <span class="stat-label"><i class="fas fa-ticket-alt"></i> 个人邀请码：</span>
+                                                <span id="inviteCode" class="stat-value"></span>
+                                            </div>
+                                            <div class="stat-card">
+                                                <span class="stat-label"><i class="fas fa-at"></i> 注册账户：</span>
+                                                <span id="regAccount" class="stat-value"></span>
+                                            </div>
+                                            <div class="stat-card">
+                                                <span class="stat-label"><i class="fas fa-key"></i> 密码：</span>
+                                                <span id="userPassword" class="stat-value"></span>
+                                            </div>
+                                            <div class="stat-card">
+                                                <span class="stat-label"><i class="fas fa-mobile-alt"></i> 登录设备：</span>
+                                                <span id="userEquipment" class="stat-value"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="stat-card">
+                                                <span class="stat-label"><i class="fas fa-calendar-alt"></i> 注册日期：</span>
+                                                <span id="regDate" class="stat-value"></span>
+                                            </div>
+                                            <div class="stat-card">
+                                                <span class="stat-label"><i class="fas fa-code-branch"></i> 上级邀请码：</span>
+                                                <span id="parentInviteCode" class="stat-value"></span>
+                                            </div>
+                                            <div class="stat-card">
+                                                <span class="stat-label"><i class="fas fa-users"></i> 下级人数：</span>
+                                                <span id="subordinatesCount" class="stat-value"></span>
+                                            </div>
+                                            <div class="stat-card">
+                                                <span class="stat-label"><i class="fas fa-sitemap"></i> 代理级别：</span>
+                                                <span id="agentLevel" class="stat-value">普通用户</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Login Info Column -->
+                        <div class="col-md-3">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h3 class="card-title"><i class="fas fa-sign-in-alt"></i> 登录信息</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="stat-card">
+                                        <span class="stat-label"><i class="fas fa-clock"></i> 最后登录：</span>
+                                        <span id="lastLoginTime" class="stat-value"></span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-label"><i class="fas fa-sign-out-alt"></i> 退出时间：</span>
+                                        <span id="logoutTime" class="stat-value"></span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-label"><i class="fas fa-circle"></i> 在线状态：</span>
+                                        <span id="onlineStatus" class="stat-value"></span>
+                                    </div>
+                                    <div class="stat-card" id="banInfoContainer" style="display: none;">
+                                        <span class="stat-label"><i class="fas fa-ban"></i> 封禁信息：</span>
+                                        <div class="border rounded p-2 mt-1">
+                                            <div><strong>原因：</strong> <span id="banReason"></span></div>
+                                            <div><strong>时长：</strong> <span id="banDuration"></span></div>
+                                            <div><strong>截止：</strong> <span id="banEndTime"></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Financial Info Column -->
+                        <div class="col-md-3">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h3 class="card-title"><i class="fas fa-wallet"></i> 财务信息</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="stat-card">
+                                        <span class="stat-label"><i class="fas fa-coins"></i> 账户余额：</span>
+                                        <span id="accountBalance" class="text-primary stat-value"></span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-label"><i class="fas fa-hand-holding-usd"></i> 抽水返佣：</span>
+                                        <span id="commissionAmount" class="text-success stat-value"></span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-label"><i class="fas fa-gift"></i> 月卡返佣：</span>
+                                        <span id="monthlyCardRebate" class="text-success stat-value"></span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-label"><i class="fas fa-arrow-circle-up"></i> 充值总额：</span>
+                                        <span id="totalRecharge" class="text-info stat-value"></span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-label"><i class="fas fa-arrow-circle-down"></i> 提现总额：</span>
+                                        <span id="totalWithdrawal" class="text-warning stat-value"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Links Section -->
+                        <div class="col-md-12 mt-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title"><i class="fas fa-link"></i> 快捷跳转</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="btn-group flex-wrap">
+                                                <button type="button" class="btn btn-info m-1 quick-link" data-link="receiptPay" data-param="sid">
+                                                    <i class="fas fa-credit-card"></i> 充值记录
+                                                </button>
+                                                <button type="button" class="btn btn-info m-1 quick-link" data-link="paymentPay" data-param="sid">
+                                                    <i class="fas fa-hand-holding-usd"></i> 提现记录
+                                                </button>
+                                                <!-- 月卡记录 -->
+                                                <button type="button" class="btn btn-info m-1 quick-link" data-link="monthlyCardRecords" data-param="sid">
+                                                    <i class="fas fa-calendar-alt"></i> 月卡记录
+                                                </button>
+                                                <button type="button" class="btn btn-info m-1 quick-link" data-link="logaccountlogin" data-param="sid">
+                                                    <i class="fas fa-sign-in-alt"></i> 登录记录
+                                                </button>
+                                                <button type="button" class="btn btn-info m-1 quick-link" data-link="moneyLog" data-param="sid">
+                                                    <i class="fas fa-money-bill-wave"></i> 货币日志
+                                                </button>
+                                                <button type="button" class="btn btn-info m-1 quick-link" data-link="gameLog" data-param="sid">
+                                                    <i class="fas fa-gamepad"></i> 游戏日志
+                                                </button>
+                                                <button type="button" class="btn btn-info m-1 quick-link" data-link="actionLog" data-param="sid">
+                                                    <i class="fas fa-clipboard-list"></i> 行为日志
+                                                </button>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{if eq .UserRole 9}}
+                    <!-- Action Buttons -->
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">用户操作</h3>
+                                </div>
+                                <div class="card-body">
+                                    <button type="button" id="modifyBalanceBtn" class="btn btn-primary mr-2 mb-2" data-toggle="modal" data-target="#modifyBalanceModal">
+                                        <i class="fas fa-money-bill-alt"></i> 修改余额
+                                    </button>
+                                    <button type="button" id="modifyVipBtn" class="btn btn-warning mr-2 mb-2" data-toggle="modal" data-target="#modifyVipModal">
+                                        <i class="fas fa-crown"></i> 修改VIP等级
+                                    </button>
+                                    <button type="button" id="addToOfficialBtn" class="btn btn-info mr-2 mb-2" data-toggle="modal">
+                                        <i class="fas fa-user-plus"></i> 添加官方账号
+                                    </button>
+                                    <button type="button" id="removeFromOfficialBtn" class="btn btn-secondary mr-2 mb-2" data-toggle="modal" style="display: none;">
+                                        <i class="fas fa-user-minus"></i> 移除官方账号
+                                    </button>
+                                    <button type="button" id="addToBlacklistBtn" class="btn btn-dark mr-2 mb-2" data-toggle="modal" >
+                                        <i class="fas fa-ban"></i> 加入黑名单
+                                    </button>
+                                    <button type="button" id="removeFromBlacklistBtn" class="btn btn-light mr-2 mb-2" data-toggle="modal" style="display: none;">
+                                        <i class="fas fa-check"></i> 移除黑名单
+                                    </button>
+                                    <button type="button" id="banAccountBtn" class="btn btn-danger mr-2 mb-2" data-toggle="modal" data-target="#banAccountModal">
+                                        <i class="fas fa-lock"></i> 封禁账号
+                                    </button>
+                                    <button type="button" id="unbanAccountBtn" class="btn btn-success mr-2 mb-2" data-toggle="modal" style="display: none;">
+                                        <i class="fas fa-unlock"></i> 解除封禁
+                                    </button>
+                                    <button type="button" id="addToWhitelistBtn" class="btn btn-secondary mr-2 mb-2" data-toggle="modal">
+                                        <i class="fas fa-shield-alt"></i> 加入维护名单
+                                    </button>
+                                    <button type="button" id="removeFromWhitelistBtn" class="btn btn-light mr-2 mb-2" data-toggle="modal" style="display: none;">
+                                        <input type="hidden" id="whiteInfoSid" value="">
+                                        <i class="fas fa-trash-alt"></i> 移除维护名单
+                                    </button>
+                                    <button type="button" id="openGiftBtn" class="btn btn-primary mr-2 mb-2" data-toggle="modal" >
+                                        <i class="fas fa-gift"></i> 开启赠送
+                                    </button>
+                                    <button type="button" id="closeGiftBtn" class="btn btn-secondary mr-2 mb-2" data-toggle="modal" style="display: none;">
+                                        <i class="fas fa-times"></i> 关闭赠送
+                                    </button>
+                                    <!-- 踢用户下线 -->
+                                    <button type="button" id="kickUserBtn" class="btn btn-danger mr-2 mb-2" data-toggle="modal" >
+                                        <i class="fas fa-sign-out-alt"></i> 踢用户下线
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{end}}
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Modals remain the same as your original code -->
+<!-- Confirm Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">确认操作</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">您确定要执行此操作吗？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="confirmActionBtn">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ template "layout/scripts.html" . }}
+
+<!-- Page specific script -->
+<script src="/dist/js/pages/userDetail.js?v={{.JSVersion}}"></script>
+
+<style>
+    .stat-card {
+        margin-bottom: 12px;
+    }
+    .stat-label {
+        font-weight: 600;
+        margin-right: 5px;
+    }
+    .user-status {
+        font-size: 14px;
+        padding: 4px 8px;
+        border-radius: 4px;
+    }
+    .dark-mode input:focus {
+        background-color: #333;
+        color: #fff;
+    }
+    .quick-link {
+        font-size: 0.9rem;
+    }
+    
+</style>
+
+<!-- JavaScript for quick links -->
+<script>
+$(document).ready(function() {
+    // Handle quick link clicks
+    $('.quick-link').on('click', function() {
+        const link = $(this).data('link');
+        const param = $(this).data('param');
+        const value = $('#accountId').text();
+        
+        if (value) {
+            window.location.href = `${link}?${param}=${value}`;
+        }
+    });
+});
+</script>
+
+{{ template "layout/footer.html" . }}

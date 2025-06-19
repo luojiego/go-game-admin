@@ -1,0 +1,95 @@
+{{ template "layout/header.html" . }}
+
+{{ template "layout/nav.html" . }}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>路由管理</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/">首页</a></li>
+                        <li class="breadcrumb-item active">路由管理</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Form Column -->
+                <div class="col-md-6">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">添加/编辑路由</h3>
+                        </div>
+                        <form id="routeForm">
+                            <div class="card-body">
+                                <input type="hidden" id="routeId">
+                                <div class="form-group">
+                                    <label for="path">路径</label>
+                                    <input type="text" class="form-control" id="path" placeholder="输入路径" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="template">模板</label>
+                                    <input type="text" class="form-control" id="template" placeholder="输入模板路径" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="title">标题</label>
+                                    <input type="text" class="form-control" id="title" placeholder="输入页面标题" required>
+                                </div>
+                                <div class="form-group">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="enabled" checked>
+                                        <label class="custom-control-label" for="enabled">启用</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">保存</button>
+                                <button type="button" class="btn btn-default" onclick="resetForm()">重置</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Table Column -->
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">现有路由</h3>
+                        </div>
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>路径</th>
+                                        <th>模板</th>
+                                        <th>标题</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="routeList"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{{ template "layout/scripts.html" . }}
+
+<!-- Page specific script -->
+<script src="/dist/js/pages/route.js"></script>
+
+{{ template "layout/footer.html" . }}

@@ -1,0 +1,371 @@
+{{ define "layout/nav.html" }}
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="/admin" class="brand-link">
+        <img src="/dist/img/headIco.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">游戏管理后台</span>
+    </a>
+
+    <div class="sidebar">
+        <!-- 搜索框 -->
+        <div class="form-inline">
+            <div class="input-group" data-widget="sidebar-search">
+                <input class="form-control form-control-sidebar" type="search" placeholder="搜索" aria-label="搜索">
+                <div class="input-group-append">
+                    <button class="btn btn-sidebar">
+                        <i class="fas fa-search fa-fw"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- 统计查询 -->
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            统计查询
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/dashboard" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>系统主页</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- 用户管理 -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            用户管理
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="userOnline" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>在线用户</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="userReg" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>用户列表</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="userDetail" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>用户详情</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="userLock" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>封禁名单</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="userBwList" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>维护名单</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="officialAccount" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>官方账号</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="blacklist" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>黑名单</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- 充值兑换 -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-exchange-alt"></i>
+                        <p>
+                            充值兑换
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="ReceiptPay" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>充值记录</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="Paymentpay" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>兑换记录</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- 商城概况 -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-shopping-cart"></i>
+                        <p>
+                            商城概况
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="mallAddItem" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>添加商品</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- 收入日报 -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-chart-line"></i>
+                        <p>
+                            收入日报
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="incomeDaily" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>收入日报</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- 在线数据 -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-server"></i>
+                        <p>
+                            在线数据
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="onlineData" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>在线数据</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- 运营日志 -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-clipboard-list"></i>
+                        <p>
+                            运营日志
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="logaccountlogin" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>每日登录日志</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="logcommission" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>每日抽水日志</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="loggoldsource" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>每日金币产出</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="redemptionCode" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>兑换码</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- VIP列表 -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-star"></i>
+                        <p>
+                            VIP列表
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="vipAdmin" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>VIP列表</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- 客服联系方式 -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-headset"></i>
+                        <p>
+                            客服联系方式
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="wechatServer" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>客服联系方式</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- 推广详情 -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-bullhorn"></i>
+                        <p>
+                            推广详情
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="promotionInfo" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>代理详情</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- 服务器日志 -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>
+                            服务器日志
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="moneyLog" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>货币日志</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="gameLog" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>游戏日志</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="actionLog" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>行为日志</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- 版本&下载 -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-download"></i>
+                        <p>
+                            版本&下载
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="version" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>版本&下载</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- 设置参数 -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-cogs"></i>
+                        <p>
+                            设置参数
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="gameSetting" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>游戏设置</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="settingProps" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>设置参数</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/merchantList" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>银商列表</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="OfficialInviteCodes" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>官方邀请码</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pubnotice" class="nav-link tab-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>发布公告</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+  </aside>
+
+{{ end }}
